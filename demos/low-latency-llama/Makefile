@@ -2,7 +2,7 @@
 NVCC?=nvcc
 
 ifndef GPU
-GPU=B200
+GPU=H100
 endif
 
 TARGET=mk_llama
@@ -10,11 +10,11 @@ SRC=llama.cu
 
 # Python version configuration
 ifndef PYTHON_VERSION
-PYTHON_VERSION=3.13
+PYTHON_VERSION=3.12
 endif
-
+PYTHON3_CONFIG=/home/jeromeku/.local/share/uv/python/cpython-3.12.8-linux-x86_64-gnu/bin/python3.12-config 
 NVCCFLAGS=-DNDEBUG -Xcompiler=-fPIE --expt-extended-lambda --expt-relaxed-constexpr -Xcompiler=-Wno-psabi -Xcompiler=-fno-strict-aliasing --use_fast_math -forward-unknown-to-host-compiler -O3 -Xnvlink=--verbose -Xptxas=--verbose -Xptxas=--warn-on-spills -std=c++20 -x cu -lrt -lpthread -ldl -lcuda -lcudadevrt -lcudart_static -lcublas -lineinfo
-NVCCFLAGS+= -I${THUNDERKITTENS_ROOT}/include -I${MEGAKERNELS_ROOT}/include $(shell python3 -m pybind11 --includes) $(shell python3-config --ldflags) -shared -fPIC -lpython${PYTHON_VERSION}
+NVCCFLAGS+= -I${THUNDERKITTENS_ROOT}/include -I${MEGAKERNELS_ROOT}/include $(shell python -m pybind11 --includes) $(shell ${PYTHON3_CONFIG} --ldflags) -shared -fPIC -lpython${PYTHON_VERSION}
 
 # Conditional setup based on the target GPU
 ifeq ($(GPU),4090)
@@ -38,4 +38,4 @@ $(TARGET): $(SRC)
 
 # Clean target
 clean:
-	rm -f $(TARGET)$(shell python3-config --extension-suffix)
+	rm -f $(TARGET)$(shell ${PYTHON3_CONFIG} --extension-suffix)

@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/ThunderKittens/include",
+                "${workspaceFolder}/demos/low-latency-llama",
+                "${workspaceFolder}/include",
+                "/home/jeromeku/kernels/megakernels/.venv/lib/python3.12/site-packages/pybind11/include"
+            ],
+            "defines": []
+        }
+    ],
+    "version": 4
+}
