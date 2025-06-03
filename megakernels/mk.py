@@ -4,6 +4,7 @@ from pathlib import Path
 
 def get_mk_func(mk_dir: Path):
     sys.path.append(str(mk_dir.expanduser().absolute()))
+    print(f"Appended path: {sys.path[-1]}")
     from mk_llama import mk_llama  # type: ignore
 
     return mk_llama

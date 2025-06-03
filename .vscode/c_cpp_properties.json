@@ -9,7 +9,8 @@
                 "/home/jeromeku/kernels/megakernels/.venv/lib/python3.12/site-packages/pybind11/include",
                 "/home/jeromeku/.local/share/uv/python/cpython-3.12.8-linux-x86_64-gnu/include/python3.12"
             ],
-            "defines": []
+            "defines": [],
+            "cppStandard": "c++20"
         }
     ],
     "version": 4
